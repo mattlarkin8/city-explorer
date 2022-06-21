@@ -4,14 +4,15 @@ import './App.css';
 import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button'
 import ListGroup from 'react-bootstrap/ListGroup';
-import { ListGroupItem } from 'react-bootstrap';
+import Image from 'react-bootstrap/Image';
 
 class App extends React.Component{
   constructor(props){
     super(props);
     this.state={
       city: '',
-      cityData: {}
+      cityData: {},
+      cityMap: ''
     }
   }
 
@@ -24,27 +25,34 @@ class App extends React.Component{
   handleSubmit=async(event)=>{
     event.preventDefault();
     let url = `https://us1.locationiq.com/v1/search.php?key=${process.env.REACT_APP_LocationIQ_API_Token}&q=${this.state.city}&format=JSON`;
-    let cityInfo = await axios.get(url);
+    let cityData = await axios.get(url);
+    let cityMap = await `https://maps.locationiq.com/v3/staticmap?key=${process.env.REACT_APP_LocationIQ_API_Token}&center=${cityData.data[0].lat},${cityData.data[0].lon}&zoom=18`;
     this.setState({
-      cityData: cityInfo.data[0]
+      cityData: cityData.data[0],
+      cityMap: cityMap
     });
   };
 
   render(){
     return(
     <>
-      <Form onSubmit={this.handleSubmit}>
-        <Form.Group controlId=''>
-          <Form.Label>Enter City Name:</Form.Label>
+      <header>
+        <h1>City Explorer</h1>
+      </header>      
+      <Form as='form' onSubmit={this.handleSubmit}>
+        <Form.Group>
+          <Form.Label as='form-label'>Enter City Name:</Form.Label>
           <Form.Control type='text' placeholder='City Name' onInput={this.handleInput}></Form.Control>
+          <Button type='submit'>Explore!</Button>
         </Form.Group>
-        <Button type='submit'>Explore!</Button>
       </Form>
-      <ListGroup>
+      <ListGroup as='list-group'>
         <ListGroup.Item>City: {this.state.cityData.display_name}</ListGroup.Item>
         <ListGroup.Item>Latitude: {this.state.cityData.lat}</ListGroup.Item>
         <ListGroup.Item>Longitude: {this.state.cityData.lon}</ListGroup.Item>
       </ListGroup>
+      <Image src={this.state.cityMap}></Image>
+      <footer>Author: Matthew Larkin</footer>
     </>
     )
   };
