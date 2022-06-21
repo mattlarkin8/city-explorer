@@ -30,7 +30,7 @@ class App extends React.Component{
     try{
       let url = `https://us1.locationiq.com/v1/search.php?key=${process.env.REACT_APP_LocationIQ_API_Token}&q=${this.state.city}&format=JSON`;
       let cityData = await axios.get(url);
-      let cityMap = await `https://maps.locationiq.com/v3/staticmap?key=${process.env.REACT_APP_LocationIQ_API_Token}&center=${cityData.data[0].lat},${cityData.data[0].lon}&zoom=11`;
+      let cityMap = `https://maps.locationiq.com/v3/staticmap?key=${process.env.REACT_APP_LocationIQ_API_Token}&center=${cityData.data[0].lat},${cityData.data[0].lon}&zoom=11`;
       this.setState({
         cityData: cityData.data[0],
         cityMap: cityMap
