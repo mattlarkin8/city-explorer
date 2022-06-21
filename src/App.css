@@ -1,18 +1,41 @@
-.App {
+h1{
+  font-size: 3.2vw;
   text-align: center;
+  margin: 10px;
+  color: rgb(177, 98, 2);
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+form{
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  justify-content: space-evenly;
+  margin: 1vw;
+  width: 12.5vw;
+  height: 8vw;
 }
 
-.App-link {
-  color: #61dafb;
+form-label{
+  margin-bottom: 30px;
+  font-size: 1.5vw;
+  color: rgb(177, 98, 2);
+}
+
+form-button{
+  margin: 1vw 2.3vw;
+  padding: .1vw;
+  font-size: 1.8vw;
+  width: fit-content;
+  height: 2.2vw;
+  border-top-left-radius: calc(0.25rem - 1px);
+  border-top-right-radius: calc(0.25rem - 1px);
+  border-bottom-left-radius: calc(0.25rem - 1px);
+  border-bottom-right-radius: calc(0.25rem - 1px);
+  background-color: rgb(124, 15, 124);
+}
+
+footer{
+  font-size: .7vw;
+  color: rgb(177, 98, 2);
+  opacity: 70%;
+  margin: .2vw .4vw;
+  padding-top: 1vw;
 }
