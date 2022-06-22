@@ -6,30 +6,33 @@ h1{
 }
 
 form{
-  display: flex;
-  justify-content: space-evenly;
   margin: 1vw;
-  width: 12.5vw;
-  height: 8vw;
 }
 
 form-label{
-  margin-bottom: 30px;
   font-size: 1.5vw;
   color: rgb(177, 98, 2);
+  margin-left: vw;
 }
 
-form-button{
-  margin: 1vw 2.3vw;
-  padding: .1vw;
-  font-size: 1.8vw;
+.form-control{
+  margin-top: 5px;
   width: fit-content;
-  height: 2.2vw;
-  border-top-left-radius: calc(0.25rem - 1px);
-  border-top-right-radius: calc(0.25rem - 1px);
-  border-bottom-left-radius: calc(0.25rem - 1px);
-  border-bottom-right-radius: calc(0.25rem - 1px);
-  background-color: rgb(124, 15, 124);
+}
+
+.btn{
+  margin-top: 5px;
+  margin-left: 3vw;
+}
+
+.container{
+  max-width: 612px;
+  width: 612px;
+  padding: 0px;
+}
+
+.list-group-item{
+  margin-bottom: 5px;
 }
 
 footer{
