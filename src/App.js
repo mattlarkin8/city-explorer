@@ -1,11 +1,13 @@
 import React from 'react';
 import axios from 'axios';
-import './App.css';
+import Weather from './Weather'
 import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button'
 import ListGroup from 'react-bootstrap/ListGroup';
 import Image from 'react-bootstrap/Image';
-import Alert from 'react-bootstrap/Alert'
+import Alert from 'react-bootstrap/Alert';
+import Container from 'react-bootstrap/Container';
+import './App.css';
 
 class App extends React.Component{
   constructor(props){
@@ -15,7 +17,12 @@ class App extends React.Component{
       cityData: {},
       cityMap: '',
       error: false,
-      errorMessage: ''
+      errorMessage: '',
+      weatherError: false,
+      weatherErrorMessage: '',
+      searchQuery: '',
+      weatherData: [],
+      displayWeather: false
     }
   }
 
@@ -42,9 +49,27 @@ class App extends React.Component{
         errorMessage: `An Error Occurred: ${error.response.status}. Please refresh the page and try again.`
       })
     }
+    this.handleGetWeather();
   };
 
+  handleGetWeather=async()=>{
+    let url=`${process.env.REACT_APP_SERVER}/weather?searchQuery=${this.state.city}`
+    try{
+    let weatherData=await axios.get(url);
+    this.setState({
+      weatherData: weatherData.data,
+      displayWeather: true
+    });
+    }catch(error){
+      this.setState({
+        weatherError: true,
+        weatherErrorMessage: `Error loading weather. ${error.response.status}`
+      })
+    }
+  }
+
   render(){
+    console.log(this.state.weatherData);
     return(
     <>
       <header>
@@ -58,14 +83,24 @@ class App extends React.Component{
         </Form.Group>
       </Form>
       {this.state.error?<Alert variant="danger">{this.state.errorMessage}</Alert>:
-      <>
-      <ListGroup as='list-group'>
-        <ListGroup.Item>City: {this.state.cityData.display_name}</ListGroup.Item>
-        <ListGroup.Item>Latitude: {this.state.cityData.lat}</ListGroup.Item>
-        <ListGroup.Item>Longitude: {this.state.cityData.lon}</ListGroup.Item>
-      </ListGroup>      
-      <Image src={this.state.cityMap}></Image>
-      </>}
+        <>
+          <Container>
+            <ListGroup as='list-group'>
+              <ListGroup.Item>City: {this.state.cityData.display_name}</ListGroup.Item>
+              <ListGroup.Item>Latitude: {this.state.cityData.lat}</ListGroup.Item>
+              <ListGroup.Item>Longitude: {this.state.cityData.lon}</ListGroup.Item>
+            </ListGroup>
+            <Image src={this.state.cityMap}></Image>
+          </Container>
+        </>
+      }
+      {this.state.error?<Alert variant="danger">{this.state.errorMessage}</Alert>
+      :this.state.displayWeather?
+        <Weather
+          weatherData={this.state.weatherData}
+        ></Weather>
+        :''
+      }
       <footer>Author: Matthew Larkin</footer>
     </>
     )
