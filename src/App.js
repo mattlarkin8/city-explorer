@@ -42,18 +42,18 @@ class App extends React.Component{
         cityData: cityData.data[0],
         cityMap: cityMap
       });
+      this.handleGetWeather(cityData.data[0].lat,cityData.data[0].lon);
     }
     catch(error){
       this.setState({
         error: true,
         errorMessage: `An Error Occurred: ${error.response.status}. Please refresh the page and try again.`
       })
-    }
-    this.handleGetWeather();
+    }    
   };
 
-  handleGetWeather=async()=>{
-    let url=`${process.env.REACT_APP_SERVER}/weather?searchQuery=${this.state.city}`
+  handleGetWeather=async(lat,lon)=>{
+    let url=`${process.env.REACT_APP_SERVER}/weather?lat=${lat}&lon=${lon}`
     try{
     let weatherData=await axios.get(url);
     this.setState({
@@ -69,6 +69,7 @@ class App extends React.Component{
   }
 
   render(){
+    console.log(this.state.weatherData);
     return(
     <>
       <header>

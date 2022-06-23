@@ -9,14 +9,14 @@ class Weather extends React.Component{
         <thead>
           <tr>
             <th>Date</th>
-            <th>Forecast</th>
+            <th>Weather</th>
           </tr>
         </thead>
         <tbody>
-          {this.props.weatherData.map((day,idx)=>(
+          {this.props.weatherData.data.map((day,idx)=>(
             <tr key={idx}>
               <td>{day.datetime}</td>
-              <td>{day.description}</td>
+              <td>{day.weather.description}</td>
             </tr>
           ))}
         </tbody>
