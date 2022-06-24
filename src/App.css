@@ -5,6 +5,13 @@ h1{
   color: rgb(177, 98, 2);
 }
 
+h2{
+  font-size: 2.5vw;
+  color: rgb(177, 98, 2);
+  text-align: center;
+  margin: 10px 0px;
+}
+
 form{
   margin: 1vw;
 }
