@@ -12,6 +12,7 @@
 <img src="img/Lab06%20WRRC.jpg" width="800" height="300"/>
 <img src="img/Lab07%20WRRC.jpg" width="800" height="300"/>
 <img src="img/Lab08%20WRRC.jpg" width="800" height="300"/>
+<img src="img/Lab09%20WRRC.jpg" width="800" height="300"/>
 
 ## **Change Log**
 
@@ -50,3 +51,37 @@ Start Time: 12:00
 Finish Time: 12:20
 
 Actual Time Needed: 20 minutes
+
+### Lab08
+
+Feature 2: Movies
+
+Estimated Time Needed: 30 minutes
+
+Start Time: 8:00
+
+Finish Time: 8:30
+
+Actual Time Needed: 30 minutes
+
+Feature 3: Publish
+
+Estimated Time Needed: 10 minutes
+
+Start Time: 8:30
+
+Finish Time: 8:45
+
+Actual Time Needed: 15 minutes
+
+### Lab09
+
+Feature 2: Refactor Front-End
+
+Estimated Time Needed: 1 hour
+
+Start Time: 10:15
+
+Finish Time: 11:00
+
+Actual Time Needed: 45 minutes
