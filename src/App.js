@@ -1,6 +1,7 @@
 import React from 'react';
 import axios from 'axios';
 import Weather from './Weather'
+import Movies from './Movies';
 import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button'
 import ListGroup from 'react-bootstrap/ListGroup';
@@ -22,7 +23,9 @@ class App extends React.Component{
       weatherErrorMessage: '',
       searchQuery: '',
       weatherData: [],
-      displayWeather: false
+      displayWeather: false,
+      movieData: [],
+      displayMovie: false
     }
   }
 
@@ -43,6 +46,7 @@ class App extends React.Component{
         cityMap: cityMap
       });
       this.handleGetWeather(cityData.data[0].lat,cityData.data[0].lon);
+      this.handleGetMovies();
     }
     catch(error){
       this.setState({
@@ -68,12 +72,26 @@ class App extends React.Component{
     }
   }
 
+  handleGetMovies=async()=>{
+    let url=`${process.env.REACT_APP_SERVER}/movies?city=${this.state.city}`
+    try{
+      let movieData=await axios.get(url);
+      this.setState({
+        movieData: movieData.data,
+        displayMovie: true
+      })
+    }
+    catch(error){
+      console.log(error);
+    }
+  }
+
   render(){
     return(
     <>
       <header>
         <h1>City Explorer</h1>
-      </header>      
+      </header>
       <Form as='form' onSubmit={this.handleSubmit}>
         <Form.Group>
           <Form.Label as='form-label'>Enter City Name:</Form.Label>
@@ -98,6 +116,13 @@ class App extends React.Component{
         <Weather
           weatherData={this.state.weatherData}
         ></Weather>
+        :''
+      }
+      {this.state.error?<Alert variant="danger">{this.state.errorMessage}</Alert>
+      :this.state.displayMovie?
+        <Movies
+        movies={this.state.movieData}
+        ></Movies>
         :''
       }
       <footer>Author: Matthew Larkin</footer>
