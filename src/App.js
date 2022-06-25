@@ -82,7 +82,7 @@ class App extends React.Component{
       })
     }
     catch(error){
-      console.log(error);
+      console.log(`Get movie error: ${error}`);
     }
   }
 
